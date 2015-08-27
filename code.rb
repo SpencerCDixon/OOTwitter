@@ -1,5 +1,3 @@
-require 'pry'
-
 def twitter_data
   [{"LaunchAcademy_"=>
    {"description"=>
@@ -435,66 +433,56 @@ def twitter_data
 end
 
 # 1. Each username followed by description
-twitter_data.each do |data_hash|
-  username = data_hash.keys.first
-  puts "#{username} #{data_hash[username]["description"] || "NA"}"
+twitter_data.each do |user_hash|
+  username = user_hash.keys.first
+  puts "#{username} #{user_hash[username]['description'] || 'NA'}"
 end
 
-
 # 2. Each username followed by followers
-puts
-
-twitter_data.each do |data_hash|
-  username = data_hash.keys.first
-  puts "#{username} #{data_hash[username]["number of followers"]}"
+twitter_data.each do |user_hash|
+  username = user_hash.keys.first
+  puts "#{username} #{user_hash[username]['number of followers']}"
 end
 
 # 3. Each username followed by length of latest tweet
-puts
-
-twitter_data.each do |data_hash|
-  username = data_hash.keys.first
-  latest_tweet_length = data_hash[username]["latest tweet"].length
+twitter_data.each do |user_hash|
+  username = user_hash.keys.first
+  latest_tweet_length = user_hash[username]['latest tweet'].length
   puts "#{username}'s latest tweet was #{latest_tweet_length} characters long"
 end
 
 # 4 each username followed by total charc count of last 20 tweets
-puts
-
-twitter_data.each do |data_hash|
-  username = data_hash.keys.first
-  latest_20_tweets = data_hash[username]["last twenty tweets"]
+twitter_data.each do |user_hash|
+  username = user_hash.keys.first
+  latest_20_tweets = user_hash[username]['last twenty tweets']
   tweet_length = latest_20_tweets.inject(0) { |sum, n| sum + n.length }
   puts "#{username}'s used #{tweet_length} characters in their last twenty tweets."
 end
 
 # User with most followers
-ordered_by_followers = twitter_data.sort_by do |data_hash|
-  data_hash[data_hash.keys.first]["number of followers"]
+ordered_by_followers = twitter_data.sort_by do |user_hash|
+  user_hash[user_hash.keys.first]['number of followers']
 end
 
 puts "#{ordered_by_followers.last.keys.first} has the most followers"
 
 # User with the most friends
-ordered_by_friends = twitter_data.sort_by do |data_hash|
-  data_hash[data_hash.keys.first]["number of friends"]
+ordered_by_friends = twitter_data.sort_by do |user_hash|
+  user_hash[user_hash.keys.first]['number of friends']
 end
 
 puts "#{ordered_by_friends.last.keys.first} has the most friends"
 
 # User with the most tweets
-ordered_by_friends = twitter_data.sort_by do |data_hash|
-  data_hash[data_hash.keys.first]["number of tweets"]
+ordered_by_friends = twitter_data.sort_by do |user_hash|
+  user_hash[user_hash.keys.first]['number of tweets']
 end
 
 puts "#{ordered_by_friends.last.keys.first} has the most tweets"
 
 # Users with descriptions
-puts
-puts "Users with descriptions"
-
-users_with_descriptions = twitter_data.select do |data_hash|
-  data_hash[data_hash.keys.first]["description"] != nil
+users_with_descriptions = twitter_data.select do |user_hash|
+  user_hash[user_hash.keys.first]['description'] != nil
 end
 
 users_with_descriptions.each do |user_hash|
@@ -502,11 +490,8 @@ users_with_descriptions.each do |user_hash|
 end
 
 # Users with locations
-puts
-puts "Users with location"
-
-users_with_descriptions = twitter_data.select do |data_hash|
-  data_hash[data_hash.keys.first]["location"] != nil
+users_with_descriptions = twitter_data.select do |user_hash|
+  user_hash[user_hash.keys.first]['location'] != nil
 end
 
 users_with_descriptions.each do |user_hash|

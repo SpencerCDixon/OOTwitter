@@ -1,5 +1,13 @@
 class TwitterData
-  def self.fetch
+  include Enumerable
+
+  def each
+    data.each do |user_hash|
+      yield user_hash
+    end
+  end
+
+  def data
     [{"LaunchAcademy_"=>
      {"description"=>
        "A 10 week, intensive bootcamp teaching you how to code with a focus on Ruby on Rails",
@@ -433,3 +441,19 @@ class TwitterData
       "location"=>"Boston, MA"}}]
   end
 end
+
+# class TwitterAPIData
+  # include Enumerable
+
+  # def each
+    # data.each do |user_hash|
+      # yield user_hash
+    # end
+  # end
+
+  # def data
+    # # not a real end point just example
+    # response = HTTParty.get('http://www.twitter.com/user_data')
+    # JSON.parse(response)
+  # end
+# end
